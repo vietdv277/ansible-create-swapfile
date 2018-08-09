@@ -1,0 +1,2 @@
+[swapfile-hosts]
+<ip_host>   ansible_ssh_user=root   ansible_ssh_pass='root_password_host'

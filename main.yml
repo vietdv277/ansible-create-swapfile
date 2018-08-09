@@ -1,0 +1,8 @@
+---
+
+
+- hosts: swapfile-hosts
+  vars_files:
+    - group_vars/production
+  roles:
+    - swapfile

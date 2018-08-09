@@ -1,0 +1,29 @@
+---
+# tasks file for swapfile
+
+- name: install python
+  yum:
+    name: python2
+    state: latest
+
+- name: create a Swapfile
+  command: fallocate -l {{ swapfile.size }}M /swapfile
+
+- name: chmod swapfile directory
+  file:
+    path: /swapfile
+    mode: 600
+
+- name: desired block size
+  command: dd if=/dev/zero of=/swapfile count={{ swapfile.size }} bs=1MiB
+
+- name: setup the swap file
+  command: mkswap /swapfile
+
+- name: enable swap
+  command: swapon /swapfile
+
+- name: make the swap file permanent
+  lineinfile:
+     path: /etc/fstab
+     line: /swapfile swap swap defaults 0 0
